@@ -3,13 +3,13 @@
 # @Email:  mlhale@unomaha.edu
 # @Filename: weatherstation.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T14:40:12-05:00
+# @Last modified time: 2021-06-23T15:05:05-05:00
 # @Author: Matthew Hale <mlhale>
 # @Date:   2021-06-23T13:26:34-05:00
 # @Email:  mlhale@unomaha.edu
 # @Filename: password-cracker.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T14:40:12-05:00
+# @Last modified time: 2021-06-23T15:05:05-05:00
 # @Copyright: Copyright (C) 2021 Matthew L. Hale
 
 # Modified barometer example, humiture, and temperature examples from https://github.com/sunfounder/SunFounder_SensorKit_for_RPi2/blob/master/Python/31_barometer.py to work with IFTTTlib by Matt Hale
@@ -37,7 +37,7 @@ STATE_DATA_PULL_UP = 4
 STATE_DATA_PULL_DOWN = 5
 
 def read_dht11_dat():
-    # Humidity sensor method
+	# Humidity sensor method
 	GPIO.setup(DHTPIN, GPIO.OUT)
 	GPIO.output(DHTPIN, GPIO.HIGH)
 	time.sleep(0.05)
@@ -134,36 +134,37 @@ def read_dht11_dat():
 
 def setup():
 	print ('\n Barometer begins...')
-    ifttt.setKey("your_key")
-    
+	val = input("Enter your ifttt maker key: ")
+	ifttt.setKey(str(val))
+	
 
 def loop():
 	while True:
-        
-        humidity_data = read_dht11_dat()
-        humidity = "N/A"
+		
+		humidity_data = read_dht11_dat()
+		humidity = "N/A"
 		if humidity_data:
 			humidity, temperature = humidity_data
 			# print ("humidity: %s %%,  Temperature: %s C`" % (humidity, temperature))
-            
+			
 		time.sleep(1)
-        
+		
 		sensor = BMP085.BMP085()
 		temp = sensor.read_temperature()	# Read temperature to veriable temp
 		pressure = sensor.read_pressure()	# Read pressure to veriable pressure
 
 		print ('')
 		print ('      Temperature = {0:0.2f} C'.format(temp))	# Print temperature
-        print ('      Humidity: %s %%' % (humidity))            # Print humidity
+		print ('      Humidity: %s %%' % (humidity))            # Print humidity
 		print ('      Pressure = {0:0.2f} Pa'.format(pressure))	# Print pressure
-        ifttt.invokeWebhookTrigger("ng-weather",temp,pressure,"N/A",) # send pressure and temp to IFTTT
+		ifttt.invokeWebhookTrigger("ng-weather",temp,pressure,"N/A",) # send pressure and temp to IFTTT
 		time.sleep(1)			
 		print ('')
 
 def destroy():
 	GPIO.cleanup()
 
-        
+		
 if __name__ == '__main__':		# Program start from here
 	setup()
 	try:
