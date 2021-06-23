@@ -3,13 +3,13 @@
 # @Email:  mlhale@unomaha.edu
 # @Filename: weatherstation.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:37:11-05:00
+# @Last modified time: 2021-06-23T15:39:59-05:00
 # @Author: Matthew Hale <mlhale>
 # @Date:   2021-06-23T13:26:34-05:00
 # @Email:  mlhale@unomaha.edu
 # @Filename: password-cracker.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:37:11-05:00
+# @Last modified time: 2021-06-23T15:39:59-05:00
 # @Copyright: Copyright (C) 2021 Matthew L. Hale
 
 # Modified barometer example, humiture, and temperature examples from https://github.com/sunfounder/SunFounder_SensorKit_for_RPi2/blob/master/Python/31_barometer.py to work with IFTTTlib by Matt Hale
@@ -20,9 +20,8 @@ from iftttlib import IFTTTLib
 
 ifttt = IFTTTLib()
 
-#!/usr/bin/env python3
 import RPi.GPIO as GPIO
-import time
+
 
 
 
