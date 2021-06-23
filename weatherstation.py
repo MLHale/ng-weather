@@ -3,13 +3,13 @@
 # @Email:  mlhale@unomaha.edu
 # @Filename: weatherstation.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:05:05-05:00
+# @Last modified time: 2021-06-23T15:17:29-05:00
 # @Author: Matthew Hale <mlhale>
 # @Date:   2021-06-23T13:26:34-05:00
 # @Email:  mlhale@unomaha.edu
 # @Filename: password-cracker.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:05:05-05:00
+# @Last modified time: 2021-06-23T15:17:29-05:00
 # @Copyright: Copyright (C) 2021 Matthew L. Hale
 
 # Modified barometer example, humiture, and temperature examples from https://github.com/sunfounder/SunFounder_SensorKit_for_RPi2/blob/master/Python/31_barometer.py to work with IFTTTlib by Matt Hale
@@ -133,8 +133,9 @@ def read_dht11_dat():
 
 
 def setup():
-	print ('\n Barometer begins...')
+	
 	val = input("Enter your ifttt maker key: ")
+	print ('\n Starting your Weather Station...')
 	ifttt.setKey(str(val))
 	
 
@@ -142,6 +143,7 @@ def loop():
 	while True:
 		
 		humidity_data = read_dht11_dat()
+		print(humidity_data)
 		humidity = "N/A"
 		if humidity_data:
 			humidity, temperature = humidity_data
@@ -157,8 +159,8 @@ def loop():
 		print ('      Temperature = {0:0.2f} C'.format(temp))	# Print temperature
 		print ('      Humidity: %s %%' % (humidity))            # Print humidity
 		print ('      Pressure = {0:0.2f} Pa'.format(pressure))	# Print pressure
-		ifttt.invokeWebhookTrigger("ng-weather",temp,pressure,"N/A",) # send pressure and temp to IFTTT
-		time.sleep(1)			
+		ifttt.invokeWebhookTrigger("ng-weather",temp,pressure,humidity) # send pressure and temp to IFTTT
+		time.sleep(60)			
 		print ('')
 
 def destroy():
