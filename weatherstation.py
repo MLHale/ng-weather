@@ -3,13 +3,13 @@
 # @Email:  mlhale@unomaha.edu
 # @Filename: weatherstation.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:19:19-05:00
+# @Last modified time: 2021-06-23T15:22:59-05:00
 # @Author: Matthew Hale <mlhale>
 # @Date:   2021-06-23T13:26:34-05:00
 # @Email:  mlhale@unomaha.edu
 # @Filename: password-cracker.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:19:19-05:00
+# @Last modified time: 2021-06-23T15:22:59-05:00
 # @Copyright: Copyright (C) 2021 Matthew L. Hale
 
 # Modified barometer example, humiture, and temperature examples from https://github.com/sunfounder/SunFounder_SensorKit_for_RPi2/blob/master/Python/31_barometer.py to work with IFTTTlib by Matt Hale
@@ -141,12 +141,14 @@ def setup():
 
 def loop():
 	while True:
-		
+		time.sleep(1)
 		humidity_data = read_dht11_dat()
 		# print(humidity_data)
 		humidity = "N/A"
 		if humidity_data:
 			humidity, temperature = humidity_data
+			if humidity == False:
+				humidity = "N/A"
 			# print ("humidity: %s %%,  Temperature: %s C`" % (humidity, temperature))
 			
 		time.sleep(1)
