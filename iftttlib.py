@@ -9,6 +9,7 @@
 
 
 import requests
+
 class IFTTTLib:
     """
     This library allows for easy triggering of IFTTT maker endpoints (aka WebHooks). 
