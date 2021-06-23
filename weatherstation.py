@@ -3,13 +3,13 @@
 # @Email:  mlhale@unomaha.edu
 # @Filename: weatherstation.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:39:59-05:00
+# @Last modified time: 2021-06-23T15:42:14-05:00
 # @Author: Matthew Hale <mlhale>
 # @Date:   2021-06-23T13:26:34-05:00
 # @Email:  mlhale@unomaha.edu
 # @Filename: password-cracker.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:39:59-05:00
+# @Last modified time: 2021-06-23T15:42:14-05:00
 # @Copyright: Copyright (C) 2021 Matthew L. Hale
 
 # Modified barometer example, humiture, and temperature examples from https://github.com/sunfounder/SunFounder_SensorKit_for_RPi2/blob/master/Python/31_barometer.py to work with IFTTTlib by Matt Hale
@@ -97,6 +97,7 @@ def read_dht11_dat():
 				continue
 	if len(lengths) != 40:
 		#print ("Data not good, skip")
+		GPIO.cleanup()
 		return False
 
 	shortest_pull_up = min(lengths)
@@ -126,6 +127,7 @@ def read_dht11_dat():
 	
 	if the_bytes[4] != checksum:
 		#print ("Data not good, skip")
+		GPIO.cleanup()
 		return False
 		
 	GPIO.cleanup()
