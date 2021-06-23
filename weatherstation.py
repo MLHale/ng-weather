@@ -3,13 +3,13 @@
 # @Email:  mlhale@unomaha.edu
 # @Filename: weatherstation.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:22:59-05:00
+# @Last modified time: 2021-06-23T15:37:11-05:00
 # @Author: Matthew Hale <mlhale>
 # @Date:   2021-06-23T13:26:34-05:00
 # @Email:  mlhale@unomaha.edu
 # @Filename: password-cracker.py
 # @Last modified by:   mlhale
-# @Last modified time: 2021-06-23T15:22:59-05:00
+# @Last modified time: 2021-06-23T15:37:11-05:00
 # @Copyright: Copyright (C) 2021 Matthew L. Hale
 
 # Modified barometer example, humiture, and temperature examples from https://github.com/sunfounder/SunFounder_SensorKit_for_RPi2/blob/master/Python/31_barometer.py to work with IFTTTlib by Matt Hale
@@ -24,19 +24,21 @@ ifttt = IFTTTLib()
 import RPi.GPIO as GPIO
 import time
 
-DHTPIN = 17
 
-GPIO.setmode(GPIO.BCM)
-
-MAX_UNCHANGE_COUNT = 100
-
-STATE_INIT_PULL_DOWN = 1
-STATE_INIT_PULL_UP = 2
-STATE_DATA_FIRST_PULL_DOWN = 3
-STATE_DATA_PULL_UP = 4
-STATE_DATA_PULL_DOWN = 5
 
 def read_dht11_dat():
+	DHTPIN = 17
+
+	GPIO.setmode(GPIO.BCM)
+
+	MAX_UNCHANGE_COUNT = 100
+
+	STATE_INIT_PULL_DOWN = 1
+	STATE_INIT_PULL_UP = 2
+	STATE_DATA_FIRST_PULL_DOWN = 3
+	STATE_DATA_PULL_UP = 4
+	STATE_DATA_PULL_DOWN = 5
+	
 	# Humidity sensor method
 	GPIO.setup(DHTPIN, GPIO.OUT)
 	GPIO.output(DHTPIN, GPIO.HIGH)
@@ -122,10 +124,12 @@ def read_dht11_dat():
 			byte = 0
 	#print (the_bytes)
 	checksum = (the_bytes[0] + the_bytes[1] + the_bytes[2] + the_bytes[3]) & 0xFF
+	
 	if the_bytes[4] != checksum:
 		#print ("Data not good, skip")
 		return False
-
+		
+	GPIO.cleanup()
 	return the_bytes[0], the_bytes[2]
 
 
